@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig">
+    <option name="defaultUnitInitialized" value="true" />
+    <option name="renamerInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="916c05aa-cfdd-43e7-b6de-3dd833a3dcf8" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/com/wasabi/model" />
+  </component>
+</project>
