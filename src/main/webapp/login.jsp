@@ -14,7 +14,7 @@
      <input type="submit" value="Entrar">
      </form>
       <h2><a href="registro.jsp">Registrar</a></h2>
-       <h2><a href="">Esqueceu a senha?</a></h2>
+       <h2><a href="esqueciSenha.jsp">Esqueceu a senha?</a></h2>
   </div>
   <div class='whysignLogin'>
       <%

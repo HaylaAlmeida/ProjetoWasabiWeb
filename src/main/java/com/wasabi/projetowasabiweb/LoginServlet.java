@@ -12,7 +12,6 @@ import java.sql.Statement;
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
     static AcessoBD bd;
-    static Connection conn;
     @Override
     public void init() throws ServletException {
         try {
@@ -33,7 +32,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             int z = 0;
             try {
-                conn = bd.getConnection();
+                Connection conn = bd.getConnection();
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery("SELECT * from cliente WHERE email = '"+email+"' AND senha = '"+senha+"'");
                 while (rs.next()){
