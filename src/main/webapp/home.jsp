@@ -14,11 +14,11 @@ h3
 <body>
 <div style="color: white; text-align: center; font-size: 30px;">Home <i class="fa fa-institution"></i></div>
 
-<h3 class="alert">Product added successfully!</h3>
+<h3 class="alert">Produto adicionado com sucesso</h3>
 
-<h3 class="alert">Product already exist in you cart! Quantity  increased!</h3>
+<h3 class="alert">Product já existe em seu carrinho, quantidade aumentada.</h3>
 
-<h3 class="alert">Password change successfully!</h3>
+<h3 class="alert">Senha trocada com sucesso</h3>
 
 <table>
         <thead>

@@ -14,7 +14,6 @@ import java.sql.SQLException;
 @WebServlet(name = "RegistroServlet", value = "/RegistroServlet")
 public class RegistroServlet extends HttpServlet {
     static AcessoBD bd;
-    static Connection conn;
     @Override
     public void init() throws ServletException {
         super.init();
@@ -34,7 +33,7 @@ public class RegistroServlet extends HttpServlet {
         String telefone = request.getParameter("telefone");
         String senha = request.getParameter("senha");
         try {
-            conn = bd.getConnection();
+            Connection conn = bd.getConnection();
             PreparedStatement ps = conn.prepareStatement("INSERT INTO cliente (nome, email, cpf, telefone," +
                     "senha) VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, nome);

@@ -14,6 +14,7 @@ body {
 }
 
 .whysign {
+  margin-top: 10px;
   float: left;
   background-color: white;
   padding-bottom: 30px;
@@ -64,7 +65,7 @@ body {
   margin-top: 25px;
   width: 80%;
   border: 0;
-  background-color: #0080FF;
+  background-color: #222;
   border-radius: 5px;
   height: 50px;
   color: white;
@@ -74,13 +75,13 @@ body {
 
 [type='text']:focus {
   outline: none;
-  border-color: #53CACE;
+  border-color: #222;
 }
 
 h1 {
-  color: red;
+  color: #222;
   font-weight: 900;
-  font-size: 2.5em;
+  font-size: 2em;
 }
 
 p {

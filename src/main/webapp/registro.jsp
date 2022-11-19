@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="firstHeader.html"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
                 <input id="cpf" type="text" name="cpf" placeholder="CPF" required> <br/>
                 <input id="telefone" type="number" name="telefone" placeholder="Telefone" required> <br/>
                 <input id="senha" type="password" name="senha" placeholder="Senha" required> <br/>
-                <label class="user-login"> Já possui conta? <a href="login.html">Entre aqui</a></label> <br>
+                <label class="user-login"> Já possui conta? <a href="login.jsp">Entre aqui</a></label> <br>
                 <input id="submit" type="submit" value="Registrar">
             </form>
         </div>

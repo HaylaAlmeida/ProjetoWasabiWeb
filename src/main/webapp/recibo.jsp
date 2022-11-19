@@ -1,7 +1,7 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="css/bill.css">
+<link rel="stylesheet" href="css/recibo.css">
 <title>Bill</title>
 </head>
 <body>

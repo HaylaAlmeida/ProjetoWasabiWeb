@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if ("admin@admin.com".equals(email) && "admin".equals(senha)){
             session.setAttribute("email", email);
-            response.sendRedirect("admin/adminHome.jsp");
+            response.sendRedirect("adminHome.jsp");
         } else {
             int z = 0;
             try {

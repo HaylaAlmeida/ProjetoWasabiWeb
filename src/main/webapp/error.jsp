@@ -1,10 +1,11 @@
 <%@page isErrorPage="true" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style>
 body
 {
- background-color: #0080FF;
+ background-color: #222222;
 }
 h1
 {
@@ -20,8 +21,8 @@ color:white;}
 <title>Error</title>
 </head>
 <body>
-<h1>Some thing went Wrong!</h1>
-<h1>So go for login! Try again!</h1>
-<h1><a href="">login</a></h1>
+<h1>Algo deu errado</h1>
+<h1>Vá para o Login e tente novamente.</h1>
+<h1><a href="login.jsp">Login</a></h1>
 </body>
 </html>
