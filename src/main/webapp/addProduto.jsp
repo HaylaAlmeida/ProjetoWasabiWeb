@@ -35,7 +35,7 @@
 
       <div class="left-div">
        <h3>Insira o preço</h3>
-       <input class="input-style" type="number" name="preco" min="0"  oninput="validity.valid||(value='');" placeholder="Preço do produto" required>
+       <input class="input-style" type="number" name="preco" min="0"  oninput="validity.valid||(value='');" step="any" placeholder="Preço do produto" required>
        <hr>
       </div>
 

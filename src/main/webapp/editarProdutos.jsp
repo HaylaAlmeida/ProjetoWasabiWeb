@@ -4,7 +4,7 @@
 <%@ page import="java.sql.*" %>
 <html>
 <head>
-<link rel="stylesheet" href="../css/addProduto.css">
+<link rel="stylesheet" href="css/addProduto.css">
 <title>Alterar produto - Wasabi</title>
 <style>
 .back
@@ -27,6 +27,11 @@
   {
 %>
  <form action="AlterarProdutoServlet" method="post">
+  <div class="left-div">
+   <h3>Insira o nome do produto</h3>
+   <input class="input-style" type="text" name="id" value="<%=rs.getString(1)%>" readonly="readonly">
+   <hr>
+  </div>
 <div class="left-div">
  <h3>Insira o nome do produto</h3>
 <input class="input-style" type="text" name="nome" value="<%=rs.getString(2)%>" required>
@@ -41,7 +46,7 @@
 
 <div class="left-div">
 <h3>Insira o preço</h3>
- <input class="input-style" type="number" name="preco" value="<%=rs.getFloat(4)%>" required>
+ <input class="input-style" type="number" name="preco" step="any" value="<%=rs.getFloat(4)%>" required>
 
  <hr>
 </div>

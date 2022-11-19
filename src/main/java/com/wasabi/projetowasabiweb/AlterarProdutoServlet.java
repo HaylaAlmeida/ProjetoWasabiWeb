@@ -35,11 +35,11 @@ public class AlterarProdutoServlet extends HttpServlet {
             st.executeUpdate("UPDATE produto SET nome='"+nome+"', categoria='"+categoria+"', preco='"+preco+"'," +
                     "descricao='"+descricao+"' WHERE idProduto='"+idProduto+"'");
             conn.commit();
-            response.sendRedirect("editarProdutos.jsp?msg=done");
+            response.sendRedirect("todosProdutosEditarProdutos.jsp?msg=done");
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("editarProdutos.jsp?msg=wrong");
+            response.sendRedirect("todosProdutosEditarProdutos.jsp?msg=wrong");
         }
 
     }
