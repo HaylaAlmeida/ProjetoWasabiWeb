@@ -1,4 +1,5 @@
 <%@page errorPage="error.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +10,21 @@
     <!--Header-->
     <br>
     <div class="topnav sticky">
+    <% String email=session.getAttribute("email").toString(); %>
     
-            <center><h2>Online shopping (BTech Days)</h2></center>
-            <h2><a href=""> <i class='fas fa-user-alt'></i></a></h2>
+            <center><h2>Restaurante Wasabi</h2></center>
+            <h2><a href=""><%out.println(email); %><i class='fas fa-user-alt'></i></a></h2>
             <a href="">Home<i class="fa fa-institution"></i></a>
-            <a href="">My Cart<i class='fas fa-cart-arrow-down'></i></a>
-            <a href="">My Orders  <i class='fab fa-elementor'></i></a>
-            <a href="">Change Details <i class="fa fa-edit"></i></a>
-            <a href="">Message Us <i class='fas fa-comment-alt'></i></a>
-            <a href="">About <i class="fa fa-address-book"></i></a>
-            <a href="">Logout <i class='fas fa-share-square'></i></a>
+            <a href="">Meu carrinho<i class='fas fa-cart-arrow-down'></i></a>
+            <a href="">Meus pedidos<i class='fab fa-elementor'></i></a>
+            <a href="">Editar Informações<i class="fa fa-edit"></i></a>
+            <a href="">Sobre <i class="fa fa-address-book"></i></a>
+            <a href="logout.jsp">Sair <i class='fas fa-share-square'></i></a>
             <div class="search-container">
-             
-               
-                <i class="fa fa-search"></i>
-             
+             <form action="buscaHome.jsp" method="post">
+                 <input type="text" placeholder="Pesquisar" name="pesquisar">
+                 <button type="submit"><i class="fa fa-search"></i> </button>
+             </form>
             </div>
           </div>
            <br>

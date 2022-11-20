@@ -1,15 +1,15 @@
-package com.wasabi.projetowasabiweb;
+package com.wasabi.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-@WebServlet(name = "AlterarProdutoServlet", value = "/AlterarProdutoServlet")
-public class AlterarProdutoServlet extends HttpServlet {
+@WebServlet(name = "addProdutoServlet", value = "/addProdutoServlet")
+public class AddProdutoServlet extends HttpServlet {
     static AcessoBD bd;
     @Override
     public void init() throws ServletException {
@@ -24,26 +24,27 @@ public class AlterarProdutoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idProduto = request.getParameter("id");
         String nome = request.getParameter("nome");
         String categoria = request.getParameter("categoria");
         Float preco = Float.valueOf(request.getParameter("preco"));
         String descricao = request.getParameter("descricao");
+        System.out.println("Funcionando");
         try {
             Connection conn = bd.getConnection();
-            Statement st = conn.createStatement();
-            st.executeUpdate("UPDATE produto SET nome='"+nome+"', categoria='"+categoria+"', preco='"+preco+"'," +
-                    "descricao='"+descricao+"' WHERE idProduto='"+idProduto+"'");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO produto (nome, categoria, preco, descricao) VALUES (?, ?, ?, ?)");
+            ps.setString(1, nome);
+            ps.setString(2, categoria);
+            ps.setFloat(3, preco);
+            ps.setString(4, descricao);
+            ps.executeUpdate();
             conn.commit();
-            response.sendRedirect("todosProdutosEditarProdutos.jsp?msg=done");
-
+            response.sendRedirect("addProduto.jsp?msg=done");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("todosProdutosEditarProdutos.jsp?msg=wrong");
+            response.sendRedirect("addProduto.jsp?msg=wrong");
         }
 
     }
-
     @Override
     public void destroy() {
         super.destroy();
@@ -54,3 +55,4 @@ public class AlterarProdutoServlet extends HttpServlet {
         }
     }
 }
+

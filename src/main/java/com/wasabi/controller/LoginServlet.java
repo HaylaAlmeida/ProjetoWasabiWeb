@@ -1,4 +1,4 @@
-package com.wasabi.projetowasabiweb;
+package com.wasabi.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

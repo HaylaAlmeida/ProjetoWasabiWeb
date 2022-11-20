@@ -1,4 +1,4 @@
-package com.wasabi.projetowasabiweb;
+package com.wasabi.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

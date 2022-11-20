@@ -12,9 +12,16 @@ body {
 header {
     background-color: white;
 }
-a
-{
-	text-decoration: none;
+nav{
+    width:100%;
+    text-align: right;
+    display: inline-block;
+    list-style: none;
+    margin: auto;
+}
+nav a {
+    color: #CBB26A;
+    text-decoration: none;
 }
 .sticky {
   position: -webkit-sticky;
@@ -106,48 +113,48 @@ table th {
 
 /*Header Css*/
 * {box-sizing: border-box;}
-    
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
     }
-    
+
     .topnav {
       overflow: hidden;
       background-color: #e9e9e9;
     }
-    
+
     .topnav a {
-      float: left;
-      display: block;
+      display: inline-flex;
+      margin: auto;
       color: black;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
       font-size: 17px;
     }
-    
+
     .topnav a:hover {
       background-color: #ddd;
       color: black;
     }
-    
+
     .topnav a.active {
       background-color: #fff;
       color: white;
     }
-    
+
     .topnav .search-container {
       float: right;
     }
-    
+
     .topnav input[type=text] {
       padding: 6px;
       margin-top: 8px;
       font-size: 17px;
       border: none;
     }
-    
+
     .topnav .search-container button {
       float: right;
       padding: 6px 10px;
@@ -158,11 +165,11 @@ table th {
       border: none;
       cursor: pointer;
     }
-    
+
     .topnav .search-container button:hover {
       background: #ccc;
     }
-    
+
     @media screen and (max-width: 600px) {
       .topnav .search-container {
         float: none;
@@ -176,9 +183,9 @@ table th {
         padding: 14px;
       }
       .topnav input[type=text] {
-        border: 1px solid #ccc;  
+        border: 1px solid #ccc;
       }
-      
+
     }
 /*footer*/
 .footer {

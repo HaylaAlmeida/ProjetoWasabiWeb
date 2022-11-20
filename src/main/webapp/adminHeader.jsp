@@ -27,14 +27,14 @@
     <div class="topnav sticky">
         <%String email = session.getAttribute("email").toString(); %>
         <h2>Restaurante Wasabi</h2>
-        <div class="nav">
-            <a href="addProduto.jsp">Adicionar produto <i class='fas fa-plus-square'></i></a>
-            <a href="todosProdutosEditarProdutos.jsp">Todos os produtos e editar produtos <i class='fab fa-elementor'></i></a>
-            <a href="">Pedidos recebidos <i class="fas fa-archive"></i></a>
-            <a href="">Cancelar pedidos <i class='fas fa-window-close'></i></a>
-            <a href="">Pedidos entregues <i class='fas fa-dolly'></i></a>
-            <a href="">Sair <i class='fas fa-share-square'></i></a>
-        </div>
+        <nav>
+                <a href="addProduto.jsp">Adicionar produto <i class='fas fa-plus-square'></i></a>
+                <a href="todosProdutosEditarProdutos.jsp">Todos os produtos e editar produtos <i class='fab fa-elementor'></i></a>
+                <a href="">Pedidos recebidos <i class="fas fa-archive"></i></a>
+                <a href="">Cancelar pedidos <i class='fas fa-window-close'></i></a>
+                <a href="">Pedidos entregues <i class='fas fa-dolly'></i></a>
+                <a href="logout.jsp">Sair <i class='fas fa-share-square'></i></a>
+        </nav>
     </div>
 </header>
            <!--table-->

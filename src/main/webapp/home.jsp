@@ -1,4 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.wasabi.controller.AcessoBD" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@include file="header.jsp"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -13,35 +18,66 @@ h3
 </head>
 <body>
 <div style="color: white; text-align: center; font-size: 30px;">Home <i class="fa fa-institution"></i></div>
-
+<%
+    String msg = request.getParameter("msg");
+    if("added".equals(msg))
+    {
+%>
 <h3 class="alert">Produto adicionado com sucesso</h3>
-
-<h3 class="alert">Product já existe em seu carrinho, quantidade aumentada.</h3>
-
-<h3 class="alert">Senha trocada com sucesso</h3>
-
+<%
+    }
+%>
+<%
+    if("exist".equals(msg))
+    {
+%>
+<h3 class="alert">Produto já existe em seu carrinho, quantidade aumentada.</h3>
+<%
+    }
+%>
+<%
+    if("invalid".equals(msg))
+    {
+%>
+<h3 class="alert">Algo deu errado, tente novamente.</h3>
+<%
+    }
+%>
 <table>
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col"><i class="fa fa-inr"></i> Price</th>
-            <th scope="col">Add to cart <i class='fas fa-cart-plus'></i></th>
+            <th scope="col">Nome</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">R$</i> Preço</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Adicionar ao carrinho <i class='fas fa-cart-plus'></i></th>
           </tr>
         </thead>
         <tbody>
-
+<%
+    try {
+        Connection conn = AcessoBD.getConnection();
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM produto");
+        while(rs.next()){
+%>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><i class="fa fa-inr"></i> </i></td>
-            <td><a href="">Add to cart <i class='fas fa-cart-plus'></i></a></td>
+            <td><%=rs.getString(1)%></td>
+            <td><%=rs.getString(2)%></td>
+            <td><%=rs.getString(3)%></td>
+            <td><%=rs.getFloat(4)%></td>
+            <td><%=rs.getString(5)%></td>
+            <td><a href="addAoCarrinho.jsp?id=<%=rs.getString(1)%>">Adicionar ao carrinho <i class='fas fa-cart-plus'></i></a></td>
           </tr>
 
         </tbody>
       </table>
+    <%}
+    }
+    catch (Exception e) {
+    e.printStackTrace();
+    }%>
       <br>
       <br>
       <br>

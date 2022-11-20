@@ -1,18 +1,15 @@
-package com.wasabi.projetowasabiweb;
-
-import com.wasabi.model.Cliente;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
+package com.wasabi.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-@WebServlet(name = "RegistroServlet", value = "/RegistroServlet")
-public class RegistroServlet extends HttpServlet {
+@WebServlet(name = "AlterarProdutoServlet", value = "/AlterarProdutoServlet")
+public class AlterarProdutoServlet extends HttpServlet {
     static AcessoBD bd;
     @Override
     public void init() throws ServletException {
@@ -27,27 +24,24 @@ public class RegistroServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idProduto = request.getParameter("id");
         String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String cpf = request.getParameter("cpf");
-        String telefone = request.getParameter("telefone");
-        String senha = request.getParameter("senha");
+        String categoria = request.getParameter("categoria");
+        Float preco = Float.valueOf(request.getParameter("preco"));
+        String descricao = request.getParameter("descricao");
         try {
             Connection conn = bd.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO cliente (nome, email, cpf, telefone," +
-                    "senha) VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, nome);
-            ps.setString(2, email);
-            ps.setString(3, cpf);
-            ps.setString(4, telefone);
-            ps.setString(5, senha);
-            ps.executeUpdate();
+            Statement st = conn.createStatement();
+            st.executeUpdate("UPDATE produto SET nome='"+nome+"', categoria='"+categoria+"', preco='"+preco+"'," +
+                    "descricao='"+descricao+"' WHERE idProduto='"+idProduto+"'");
             conn.commit();
-            response.sendRedirect("registro.jsp?msg=valid");
+            response.sendRedirect("todosProdutosEditarProdutos.jsp?msg=done");
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("registro.jsp?msg=invalid");
+            response.sendRedirect("todosProdutosEditarProdutos.jsp?msg=wrong");
         }
+
     }
 
     @Override
