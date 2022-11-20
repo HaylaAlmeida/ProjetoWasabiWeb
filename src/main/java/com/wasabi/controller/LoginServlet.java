@@ -38,7 +38,8 @@ public class LoginServlet extends HttpServlet {
                 while (rs.next()){
                     z = 1;
                     session.setAttribute("email", email);
-                    response.sendRedirect("home.jsp");
+                    response.sendRedirect("home" +
+                            ".jsp");
                 }
                 if (z == 0){
                     response.sendRedirect("login.jsp?msg=user_not_found");
