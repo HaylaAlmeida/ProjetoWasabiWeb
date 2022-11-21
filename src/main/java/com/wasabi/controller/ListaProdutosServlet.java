@@ -1,6 +1,7 @@
 package com.wasabi.controller;
 
 import com.wasabi.model.Produto;
+import com.wasabi.model.ProdutoDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -16,7 +17,6 @@ import java.util.List;
 @WebServlet(name = "ListaProdutosServlet", value = "/ListaProdutosServlet")
 public class ListaProdutosServlet extends HttpServlet {
     static AcessoBD bd;
-    String page="homeTeste.jsp";
     @Override
     public void init() throws ServletException {
         super.init();
@@ -29,25 +29,21 @@ public class ListaProdutosServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Connection conn = null;
-        HttpSession session = request.getSession();
+        String action = request.getParameter("action");
         response.setContentType("text/html");
-        List<Produto> produtos = new ArrayList<>();
         try {
-            conn = bd.getConnection();
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM produto");
-            while(rs.next()) {
-                Produto produto = new Produto(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getFloat(4), rs.getString(5));
-                produtos.add(produto);
+            Connection conn = bd.getConnection();
+            if (action.equals("produtos")) {
+                List<Produto> produtos = ProdutoDAO.getProdutos(conn);
+                String msg = "Sem dados";
+                if (produtos.size() > 0){
+                    msg = produtos.size() + (produtos.size() > 1 ? "registros" : "registro");
+                }
+                request.setAttribute("MSG", msg);
+                request.setAttribute("produtos", produtos);
+                request.getRequestDispatcher("todosProdutos.jsp").forward(request, response);
             }
-            request.setAttribute("produtos", produtos);
-            RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 
-            if (dispatcher != null){
-                dispatcher.forward(request, response);
-            }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             //response.sendRedirect("addProduto.jsp?msg=wrong");

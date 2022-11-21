@@ -28,7 +28,6 @@ public class AddProdutoServlet extends HttpServlet {
         String categoria = request.getParameter("categoria");
         Float preco = Float.valueOf(request.getParameter("preco"));
         String descricao = request.getParameter("descricao");
-        System.out.println("Funcionando");
         try {
             Connection conn = bd.getConnection();
             PreparedStatement ps = conn.prepareStatement("INSERT INTO produto (nome, categoria, preco, descricao) VALUES (?, ?, ?, ?)");

@@ -29,19 +29,18 @@ public class AddAoCarrinhoServlet extends HttpServlet {
         float preco = 0;
         float produtoTotal = 0;
         float total = 0;
-
         int z = 0;
         try {
             Connection conn = AcessoBD.getConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM produto WHERE idProduto='"+idProduto+"'");
             while (rs.next()){
-                preco = rs.getFloat(4);
-                produtoTotal = produtoTotal + preco;
+                preco = rs.getFloat(5);
+                produtoTotal = preco;
             }
             ResultSet rs1 = st.executeQuery("SELECT * FROM carrinho WHERE idProduto='"+idProduto+"' AND email='"+email+"' AND endereco IS NULL");
             while (rs1.next()){
-                total = rs1.getFloat(6);
+                total = rs1.getFloat(5);
                 total = total + produtoTotal;
                 quantidade = rs1.getInt(4);
                 quantidade = quantidade + 1;

@@ -22,6 +22,9 @@ public class Produto {
     @Column(name = "descricao", nullable = false, length = 400)
     private String descricao;
 
+    public String toString(){
+        return "Produto ID:"+id+" Nome:"+nome+" Categoria:"+categoria+" Preço:"+preco+" Descricao:"+descricao;
+    }
     public Produto(Integer id, String nome, String categoria, Float preco, String descricao) {
         this.id = id;
         this.nome = nome;

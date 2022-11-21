@@ -13,8 +13,8 @@
     
             <center><h2>Restaurante Wasabi</h2></center>
             <h2><a href=""><%out.println(email); %><i class='fas fa-user-alt'></i></a></h2>
-            <a href="">Home<i class="fa fa-institution"></i></a>
-            <a href="">Meu carrinho<i class='fas fa-cart-arrow-down'></i></a>
+            <a href="home.jsp">Home<i class="fa fa-institution"></i></a>
+            <a href="meuCarrinho.jsp">Meu carrinho<i class='fas fa-cart-arrow-down'></i></a>
             <a href="">Meus pedidos<i class='fab fa-elementor'></i></a>
             <a href="">Editar Informações<i class="fa fa-edit"></i></a>
             <a href="">Sobre <i class="fa fa-address-book"></i></a>

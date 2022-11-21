@@ -28,7 +28,7 @@
 %>
  <form action="AlterarProdutoServlet" method="post">
   <div class="left-div">
-   <h3>Insira o nome do produto</h3>
+   <h3>ID do produto</h3>
    <input class="input-style" type="text" name="id" value="<%=rs.getString(1)%>" readonly="readonly">
    <hr>
   </div>
