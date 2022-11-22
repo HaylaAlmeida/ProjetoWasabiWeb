@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="wasabiweb@localhost" uuid="916c05aa-cfdd-43e7-b6de-3dd833a3dcf8">
+    <data-source source="LOCAL" name="web@localhost" uuid="39e9ab36-1a93-4b4c-89c0-986064ac3389">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/wasabiweb</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/web</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

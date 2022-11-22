@@ -1,6 +1,5 @@
 <%@page import="java.sql.*" %>
 <%@ page import="com.wasabi.controller.AcessoBD" %>
-<%@include file="footer.jsp" %>
 
 <html>
 <head>

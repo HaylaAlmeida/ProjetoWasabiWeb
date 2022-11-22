@@ -1,66 +1,50 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="com.wasabi.controller.AcessoBD" %>
+<%@ page import="com.wasabi.model.Produto" %>
+<%@ page import="com.wasabi.model.ProdutoDAO" %>
+<%@ page import="java.util.List" %>
 <%@include file="header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    ProdutoDAO pd = new ProdutoDAO();
+    System.out.println(request.getParameter("pesquisa"));
+    List<Produto> produtos = pd.getSpecificProdutos(request.getParameter("pesquisa"));
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home</title>
+<title>Pesquisar produto</title>
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-<div style="color: white; text-align: center; font-size: 30px;">Home <i class="fa fa-institution"></i></div>
-<table>
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Categoria</th>
-            <th scope="col"><i class="fa fa-inr"></i> Price</th>
-            <th scope="col">Add to cart <i class='fas fa-cart-plus'></i></th>
-          </tr>
-        </thead>
-        <tbody>
-        <%
-            int z = 0;
-            try {
-                String pesquisar = request.getParameter("pesquisar");
-                Connection conn = AcessoBD.getConnection();
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM produto WHERE nome like'%"+pesquisar+"%' OR " +
-                        "categoria like '%"+pesquisar+"%'");
-                while(rs.next())
-                {
-                    z=1;
-
-        %>
-        <tr>
-            <td><%=rs.getString(1)%></td>
-            <td><%=rs.getString(2)%></td>
-            <td><%=rs.getString(3)%></td>
-            <td><%=rs.getFloat(4)%></td>
-            <td><%=rs.getString(5)%></td>
-            <td><a href="addAoCarrinho.jsp?id=<%=rs.getString(1)%>">Adicionar ao carrinho <i class='fas fa-cart-plus'></i></a></td>
-        </tr>
-        <%}
+<div class="container">
+    <div class="card-header my-3">Resultado</div>
+    <div class="row">
+            <%
+        if(!produtos.isEmpty()) {
+            for(Produto p : produtos) {%>
+        <div class="col-md-5 my-3 mx-auto">
+            <div class="card w-100 h-100" style="width: 18rem;">
+                <img class="card-img-top" src="produtos/<%=p.getUrl()%>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><%= p.getNome()%></h5>
+                    <h6 class="price">Preço: R$ <%= p.getPreco()%></h6>
+                    <h6 class="category">Categoria: <%= p.getCategoria()%></h6>
+                    <p class="description"><%=p.getDescricao()%></p>
+                    <div class="mt-3 d-flex justify-content-between">
+                        <a href="/AddAoCarrinhoServlet?id=<%=p.getId()%>" class="btn btn-dark">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <%}
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }%>
-        </tbody>
-      </table>
-      	<%
-        if (z == 0)
-        {%>
-	<h1 style="color:white; text-align: center;">Nada para mostrar</h1>
-	<%
-        }
-	%>
-      <br>
-      <br>
-      <br>
-      <div class="footer">
-          <p>All right reserved by BTech Days</p>
-      </div>
-
+    %>
 </body>
 </html>

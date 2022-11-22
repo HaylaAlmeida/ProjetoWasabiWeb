@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class AcessoBD {
-    static String url = "jdbc:mysql://localhost:3306/wasabiweb";
+    static String url = "jdbc:mysql://localhost:3306/web";
     static String usuario = "root";
     static String senha = "^@o$31Aw758w";
     static Connection conn;
