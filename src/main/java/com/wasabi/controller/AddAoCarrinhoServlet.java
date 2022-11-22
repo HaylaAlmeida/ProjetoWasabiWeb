@@ -1,82 +1,48 @@
 package com.wasabi.controller;
 
+import com.wasabi.model.Carrinho;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "AddAoCarrinhoServlet", value = "/AddAoCarrinhoServlet")
 public class AddAoCarrinhoServlet extends HttpServlet {
 
-    static AcessoBD bd;
     @Override
-    public void init() throws ServletException {
-        super.init();
-        bd = new AcessoBD();
-        try {
-            bd.conectar();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = session.getAttribute("email").toString();
-        int idProduto = Integer.parseInt(request.getParameter("id"));
-        int quantidade = 1;
-        float preco = 0;
-        float produtoTotal = 0;
-        float total = 0;
-        int z = 0;
-        try {
-            Connection conn = AcessoBD.getConnection();
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM produto WHERE idProduto='"+idProduto+"'");
-            while (rs.next()){
-                preco = rs.getFloat(5);
-                produtoTotal = preco;
-            }
-            ResultSet rs1 = st.executeQuery("SELECT * FROM carrinho WHERE idProduto='"+idProduto+"' AND email='"+email+"' AND endereco IS NULL");
-            while (rs1.next()){
-                total = rs1.getFloat(5);
-                total = total + produtoTotal;
-                quantidade = rs1.getInt(4);
-                quantidade = quantidade + 1;
-                z=1;
-            }
-            if (z == 1){
-                st.executeUpdate("UPDATE carrinho SET total='"+total+"', quantidade ='"+ quantidade+ "' WHERE idProduto="+ idProduto+" AND " +
-                        "email ='"+email+"' AND endereco IS NULL");
-                conn.commit();
-                response.sendRedirect("home.jsp?msg=exist");
-            }
-            if (z==0) {
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO carrinho(email, idProduto, quantidade, preco, total) VALUES " +
-                        "(?, ?, ?, ?, ?)");
-                ps.setString(1, email);
-                ps.setInt(2, idProduto);
-                ps.setInt(3, quantidade);
-                ps.setFloat(4, preco);
-                ps.setFloat(5, total);
-                ps.executeUpdate();
-                conn.commit();
-                response.sendRedirect("home.jsp?msg=added");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("home.jsp?msg=invalid");
-        }
-    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try (PrintWriter out = response.getWriter()){
+            List<Carrinho> carrinhoItens = new ArrayList<>();
+            int id = Integer.parseInt(request.getParameter("id"));
+            Carrinho carrinho = new Carrinho();
+            carrinho.setId(id);
+            carrinho.setQuantidade(1);
+            HttpSession session = request.getSession();
+            List<Carrinho> carrinho_lista = (ArrayList<Carrinho>) session.getAttribute("carrinhoItens");
+            if(carrinho_lista == null) {
+                carrinhoItens.add(carrinho);
+                session.setAttribute("carrinhoItens", carrinhoItens);
+                response.sendRedirect("home.jsp");
+            } else {
+                carrinhoItens = carrinho_lista;
+                boolean existe = false;
 
-    @Override
-    public void destroy() {
-        super.destroy();
-        try {
-            bd.desconectar();
-        } catch (SQLException e) {
-            e.printStackTrace();
+                for(Carrinho c: carrinho_lista){
+                    if(c.getId() == id){
+                        existe = true;
+                        response.sendRedirect("meuCarrinho.jsp");
+                    }
+                }
+                if (!existe) {
+                    carrinhoItens.add(carrinho);
+                    response.sendRedirect("home.jsp");
+                }
+            }
         }
     }
 

@@ -1,109 +1,83 @@
 <%@page import="com.wasabi.controller.AcessoBD" %>
 <%@page import="java.sql.*" %>
+<%@ page import="com.wasabi.model.Carrinho" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.wasabi.model.ProdutoDAO" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@include file="header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%
+    DecimalFormat dcf = new DecimalFormat("#.##");
+    request.setAttribute("dcf", dcf);
+    List<Carrinho> carrinhoLista = (ArrayList<Carrinho>) session.getAttribute("carrinhoItens");
+    List<Carrinho> carrinhoProdutos = null;
+    if(carrinhoLista != null){
+        ProdutoDAO pd = new ProdutoDAO();
+        carrinhoProdutos = pd.getProdutosCarrinho(carrinhoLista);
+        float total = pd.getTotalCarrinho(carrinhoLista);
+        request.setAttribute("carrinhoLista", carrinhoLista);
+        request.setAttribute("total", total);
+    }
+%>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Meu Carrinho</title>
-    <style>
-        h3
-        {
-            color: yellow;
-            text-align: center;
-        }
-    </style>
 </head>
+<style>
+    .table tbody td {
+        vertical-align: middle;
+    }
+    .btn-incre, .btn-decre {
+        box-shadow: none;
+        font-size: 25px;
+    }
+</style>
 <body>
-<div style="color: white; text-align: center; font-size: 30px;">Meu carrinho <i class='fas fa-cart-arrow-down'></i></div>
-<%
-    String msg=request.getParameter("msg");
-    if("notPossible".equals(msg))
-    {
-%>
-<h3 class="alert">Existe apenas uma unidade! Então clique em remover!</h3>
-<%}%>
-<%
-    if("inc".equals(msg))
-    {
-%>
-<h3 class="alert">Quantidade aumentada com sucesso!</h3>
-<%} %>
-<%
-    if("dec".equals(msg))
-    {
-%>
-<h3 class="alert">Quantidade reduzida com sucesso!</h3>
-<%} %>
-<%
-    if("removed".equals(msg))
-    {
-%>
-<h3 class="alert">Produto removido com sucesso!</h3>
-<%} %>
-<table>
-    <thead>
-    <%
-        float total = 0;
-        int id = 0;
-        try{
-            Connection con = AcessoBD.getConnection();
-            Statement st = con.createStatement();
-            ResultSet rs1 = st.executeQuery("SELECT sum(total) FROM carrinho WHERE email='"+email+"' AND endereco IS NULL");
-            while(rs1.next()){
-                System.out.println(rs1.getFloat(1));
-                total=rs1.getFloat(1);
+<div class="container">
+    <div class="d-flex py-3">
+        <h3>Preço total: R$ ${(total>0) ? dcf.format(total) : 0}</h3>
+        <a class="mx-3 btn btn-primary" href="confirmarPedido.jsp">Finalizar</a>
+    </div>
+    <table class="table table-loght">
+        <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Cancelar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            if(carrinhoLista != null) {
+                for (Carrinho c: carrinhoProdutos) { %>
+                    <tr>
+                        <td><%= c.getNome()%></td>
+                        <td><%= c.getCategoria()%></td>
+                        <td><%= dcf.format(c.getPreco())%></td>
+                        <td>
+                            <form action="" method="post" class="form-inline">
+                                <input type="hidden" name="id" value="<%= c.getId()%>" class="form-input">
+                                <div class="form-group d-flex justify-content-between w-50">
+                                    <a class="btn btn-sm btn-incre" href="AlterarQuantidadeServlet?action=inc&id=<%=c.getId()%>"><i class="fas fa-plus-square"></i> </a>
+                                    <input type="text" name="quantidade" class="form-control w-50" value="<%= c.getQuantidade() %>" readonly>
+                                    <a class="btn btn-sm btn-decre" href="AlterarQuantidadeServlet?action=dec&id=<%=c.getId()%>"><i class="fas fa-minus-square"></i> </a>
+                                </div>
+                            </form>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-danger" href="RemoverCarrinhoServlet?id=<%=c.getId()%>">Remover</a>
+                        </td>
+                    </tr>
+               <% }
             }
-    %>
+        %>
+        </tbody>
+    </table>
 
-    <tr>
-        <th scope="col" style="background-color: yellow;">Total: R$ <%out.println(total);%> </th>
-        <%if(total>0){ %><th scope="col"><a href="enderecoPagamentoDoPedido.jsp">Proceed to order</a></th><%} %>
-    </tr>
-    </thead>
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nome do Produto</th>
-        <th scope="col">Categoria</th>
-        <th scope="col">Preço</th>
-        <th scope="col">Quantidade</th>
-        <th scope="col">Subtotal</th>
-        <th scope="col">Remover <i class='fas fa-trash-alt'></i></th>
-    </tr>
-    </thead>
-    <tbody>
-    <%
-        ResultSet rs = st.executeQuery("select * from produto inner join carrinho on produto.idProduto=carrinho.idProduto and carrinho.email='"+email+"' and carrinho.endereco is NULL");
-        while(rs.next()){
-
-    %>
-    <tr>
-        <%id = id+1;%>
-        <td><%out.println(id); %></td>
-        <td><%=rs.getString(2) %></td>
-        <td><%=rs.getString(3) %></td>
-        <td>R$ <%=rs.getString(4) %></td>
-        <td>
-            <a href="alterarQuantidade.jsp?id=<%=rs.getString(1)%>&quantidade=inc&preco=<%=rs.getString(4)%>"><i class='fas fa-plus-circle'></i></a> <%=rs.getString(9) %>
-            <a href="alterarQuantidade.jsp?id=<%=rs.getString(1)%>&quantidade=dec&preco=<%=rs.getString(4)%>"><i class='fas fa-minus-circle'></i></a>
-        </td>
-        <td>R$ <%=rs.getFloat(11) %></td>
-        <td><a href="removerCarrinho.jsp?id=<%=rs.getString(1)%>">Remover <i class='fas fa-trash-alt'></i></a></td>
-    </tr>
-    <%
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    %>
-
-    </tbody>
-</table>
-<br>
-<br>
-<br>
-
+</div>
 </body>
 </html>

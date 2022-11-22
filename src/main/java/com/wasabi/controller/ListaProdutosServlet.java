@@ -1,6 +1,5 @@
-package com.wasabi.controller;
+/*package com.wasabi.controller;
 
-import com.wasabi.model.Produto;
 import com.wasabi.model.ProdutoDAO;
 
 import javax.servlet.*;
@@ -8,10 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ListaProdutosServlet", value = "/ListaProdutosServlet")
@@ -59,3 +55,4 @@ public class ListaProdutosServlet extends HttpServlet {
         }
     }
 }
+*/

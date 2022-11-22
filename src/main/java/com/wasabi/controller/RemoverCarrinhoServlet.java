@@ -1,5 +1,7 @@
 package com.wasabi.controller;
 
+import com.wasabi.model.Carrinho;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -7,44 +9,34 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "RemoverCarrinhoServlet", value = "/RemoverCarrinhoServlet")
 public class RemoverCarrinhoServlet extends HttpServlet {
-    static AcessoBD bd;
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        bd = new AcessoBD();
-        try {
-            bd.conectar();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        String idProduto=request.getParameter("id");
         try{
-            Connection conn = bd.getConnection();
-            Statement st = conn.createStatement();
-            st.executeUpdate("DELETE FROM carrinho WHERE email='"+email+"' AND idProduto='"+idProduto+"' AND endereco IS NULL");
-            conn.commit();
-            response.sendRedirect("meuCarrinho.jsp?msg=removed");
+            String id = request.getParameter("id");
+            if (id != null) {
+                List<Carrinho> carrinho_lista = (ArrayList<Carrinho>) session.getAttribute("carrinhoItens");
+                if(carrinho_lista != null){
+                    for(Carrinho c: carrinho_lista){
+                        if(c.getId() == Integer.parseInt(id)){
+                            carrinho_lista.remove(carrinho_lista.indexOf(c));
+                            break;
+                        }
+                    }
+                    response.sendRedirect("meuCarrinho.jsp");
+                }
+            } else {
+                response.sendRedirect("meuCarrinho.jsp");
+            }
         }catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-    @Override
-    public void destroy() {
-        super.destroy();
-        try {
-            bd.desconectar();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }

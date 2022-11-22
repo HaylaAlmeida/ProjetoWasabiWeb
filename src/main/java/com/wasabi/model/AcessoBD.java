@@ -1,4 +1,4 @@
-package com.wasabi.controller;
+package com.wasabi.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
