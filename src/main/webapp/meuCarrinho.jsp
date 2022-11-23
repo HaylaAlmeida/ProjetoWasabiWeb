@@ -1,5 +1,3 @@
-<%@page import="com.wasabi.controller.AcessoBD" %>
-<%@page import="java.sql.*" %>
 <%@ page import="com.wasabi.model.Carrinho" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>

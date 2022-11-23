@@ -21,8 +21,8 @@ color:white;}
 <title>Error</title>
 </head>
 <body>
-<h1>Algo deu errado</h1>
-<h1>Vá para o Login e tente novamente.</h1>
+<h1>Um erro ocorreu.</h1>
+<h1>Vá para a página de login e tente novamente.</h1>
 <h1><a href="login.jsp">Login</a></h1>
 </body>
 </html>

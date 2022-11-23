@@ -17,7 +17,7 @@
 %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Informações de pagamento</title>
   <link rel="stylesheet" href="css/confirmarPedido.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -50,27 +50,27 @@
             <label for="cpf">CPF</label>
             <input type="text" id="cpf" name="cpf" value="<%=cliente.getCpf()%>" readonly>
             <label for="adr"><i class="fa fa-address-card-o"></i> Endereço de entrega e cobrança</label>
-            <input type="text" id="adr" name="address" required>
+            <input type="text" id="adr" name="address" maxlength="400" required>
           </div>
 
           <div class="col-50">
             <h3>Pagamento</h3>
             <label for="cname">Nome no cartão</label>
-            <input type="text" id="cname" name="cardname" required>
+            <input type="text" id="cname" name="cardname" maxlength="45" required>
             <label for="ccnum">Número do cartão</label>
-            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>
+            <input type="number" id="ccnum" name="cardnumber" maxlength="20" placeholder="1111-2222-3333-4444" required>
             <label for="ccpf">CPF</label>
-            <input type="text" id="ccpf" name="ccpf" required>
+            <input type="text" id="ccpf" name="ccpf" maxlength="25" required>
             <label for="expmonth">Mês de expiração</label>
-            <input type="number" id="expmonth" name="expmonth" size="2" placeholder="11" required>
+            <input type="number" id="expmonth" name="expmonth" maxlength="2" placeholder="11" required>
             <div class="row">
               <div class="col-50">
                 <label for="expyear">Ano de expiração</label>
-                <input type="number" id="expyear" name="expyear" size="2" placeholder="26" required>
+                <input type="number" id="expyear" name="expyear" maxlength="2" placeholder="26" required>
               </div>
               <div class="col-50">
                 <label for="cvv">CVV</label>
-                <input type="number" id="cvv" name="cvv" placeholder="352" required>
+                <input type="number" id="cvv" name="cvv" maxlength="3" placeholder="352" required>
               </div>
             </div>
           </div>

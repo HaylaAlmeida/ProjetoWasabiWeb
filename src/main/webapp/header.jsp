@@ -11,7 +11,7 @@
 <header>
 <div class="hero">
     <nav>
-        <img src="img/1.png" class="logo">
+        <a href="home.jsp"><img src="img/1.png" width = "120" height="124"></a>
         <ul style="margin-bottom: 0px;" >
             <li><a href="home.jsp">Home  <i class='fas fa-plus-square'></i></a></li>
             <li><a href="meuCarrinho.jsp">Meu Carrinho  <i class='fab fa-elementor'></i></a></li>
@@ -31,7 +31,7 @@
                     <h3 style="color: black"> <%=email%> </h3>
                 </div>
                 <hr>
-                <a href="#" class="sub-menu-link">
+                <a href="editarPerfil.jsp" class="sub-menu-link">
                     <img src="/img/user.png" alt="">
                     <p>Editar perfil</p>
                     <span>></span>
