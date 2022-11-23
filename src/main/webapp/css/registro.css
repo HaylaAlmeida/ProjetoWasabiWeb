@@ -1,5 +1,5 @@
 body {
-  background-color: #222;
+  background-color: #fff;
   font: 1em Helvetica;
 }
 .user-form {
@@ -11,12 +11,19 @@ body {
   background-color: white;
   margin: 25px auto;
   margin-top: 50px;
+  padding-top: 2rem ;
+}
+
+.whysign a {
+  font-size: 16px;
+  color: #222;
 }
 
 .whysign {
   margin-top: 10px;
   float: left;
   background-color: white;
+  padding-top: 2rem;
   padding-bottom: 30px;
   width: 480px;
   height: 528px;
@@ -28,7 +35,6 @@ body {
   background-color: white;
   width: 480px;
   height: 347px;
-  border-radius: 0 5px 5px 0;
 }
 .whyforgotPassword
 {
@@ -41,10 +47,9 @@ body {
 .registro {
   float: left;
   width: 300px;
-  padding: 30px 20px;
+  padding: 0px 20px;
   background-color: white;
   text-align: center;
-  border-radius: 5px 0 0 5px;
 }
 
 

@@ -11,11 +11,11 @@
     <div id='container'>
         <div class='registro'>
             <form action="RegistroServlet" method="post">
-                <input id="nome" type="text" name="nome" placeholder="Nome completo" required> <br/>
-                <input id="email" type="email" name="email" placeholder="E-mail" required> <br/>
-                <input id="cpf" type="text" name="cpf" placeholder="CPF" required> <br/>
-                <input id="telefone" type="number" name="telefone" placeholder="Telefone" required> <br/>
-                <input id="senha" type="password" name="senha" placeholder="Senha" required> <br/>
+                <input id="nome" type="text" name="nome" placeholder="Nome completo" minlength="5" maxlength="80" required> <br/>
+                <input id="email" type="email" name="email" placeholder="E-mail" maxlength="100" required> <br/>
+                <input id="cpf" type="text" name="cpf" placeholder="CPF" minlength="11" maxlength="25" required> <br/>
+                <input id="telefone" type="number" name="telefone" placeholder="Telefone" minlength="8" maxlength="25" required> <br/>
+                <input id="senha" type="password" name="senha" placeholder="Senha" minlength="3" maxlength="50" required> <br/>
                 <label class="user-login"> Já possui conta? <a href="login.jsp">Entre aqui</a></label> <br>
                 <input id="submit" type="submit" value="Registrar">
             </form>

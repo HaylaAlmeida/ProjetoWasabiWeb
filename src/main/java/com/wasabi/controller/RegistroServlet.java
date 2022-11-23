@@ -40,7 +40,7 @@ public class RegistroServlet extends HttpServlet {
             ps.setString(5, senha);
             ps.executeUpdate();
             conn.commit();
-            response.sendRedirect("registro.jsp?msg=valid");
+            response.sendRedirect("login.jsp");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             response.sendRedirect("registro.jsp?msg=invalid");

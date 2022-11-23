@@ -27,10 +27,11 @@
 </head>
 <body>
 <div class="container">
-    <div class="card-header my-3">All Orders</div>
+    <div class="card-header my-3">Todos os pedidos</div>
     <table class="table table-light">
         <thead>
         <tr>
+            <th scope="col">ID</th>
             <th scope="col">Data</th>
             <th scope="col">Nome</th>
             <th scope="col">Categoria</th>
@@ -45,12 +46,13 @@
             if(pedidos != null){
                 for(Pedido p:pedidos){%>
         <tr>
+            <td><%=p.getId() %></td>
             <td><%=p.getData() %></td>
             <td><%=p.getNome() %></td>
             <td><%=p.getCategoria() %></td>
             <td><%=p.getQuantidade() %></td>
+            <td><%=dcf.format(p.getPreco()/p.getQuantidade()) %></td>
             <td><%=dcf.format(p.getPreco()) %></td>
-            <td><%=dcf.format(p.getTotal()) %></td>
         </tr>
         <%}
         }

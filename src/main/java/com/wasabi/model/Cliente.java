@@ -22,18 +22,26 @@ public class Cliente {
     @Column(name = "telefone", nullable = false, length = 25)
     private String telefone;
 
-    @Column(name = "endereco", nullable = false, length = 300)
-    private String endereco;
-
     @Column(name = "senha", nullable = false, length = 40)
     private String senha;
 
-    public Cliente(String nome, String email, String cpf, String telefone, String endereco, String senha) {
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", senha='" + senha + '\'' +
+                '}';
+    }
+
+    public Cliente(String nome, String email, String cpf, String telefone, String senha) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.endereco = endereco;
         this.senha = senha;
     }
 
@@ -79,14 +87,6 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getSenha() {
